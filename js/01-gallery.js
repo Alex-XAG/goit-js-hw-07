@@ -3,6 +3,33 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
+// Создание и рендер разметки по массиву данных galleryItems и предоставленному
+// шаблону элемента галереи.
+
+const galleryContainer = document.querySelector(".gallery");
+console.log(galleryContainer);
+
+galleryItems.map((galleryItem) => {
+  const srcSmallImg = galleryItem.preview;
+  const srcLargeImg = galleryItem.original;
+  const altImg = galleryItem.description;
+  console.log(altImg);
+  galleryContainer.insertAdjacentHTML(
+    "beforeend",
+    `<div class="gallery__item">
+  <a class="gallery__link" href="${srcLargeImg}">
+    <img
+      class="gallery__image"       src="${srcSmallImg}"
+      data-source="${srcLargeImg}"
+      alt="${altImg}"
+    />
+  </a>
+</div>`
+  );
+});
+
+// Реализация делегирования на div.gallery и получение url большого изображения.
+
 // галерея изображений
 // Создай галерею с возможностью клика по её элементам и просмотра
 // полноразмерного изображения в модальном окне.Посмотри демо
@@ -10,11 +37,6 @@ console.log(galleryItems);
 
 // Выполняй это задание в файлах 01-gallery.html и 01-gallery.js.
 // Разбей его на несколько подзадач:
-
-// Создание и рендер разметки по массиву данных galleryItems и предоставленному
-// шаблону элемента галереи.
-
-// Реализация делегирования на div.gallery и получение url большого изображения.
 
 // Подключение скрипта и стилей библиотеки модального окна basicLightbox.
 //  Используй CDN сервис jsdelivr и добавь в проект ссылки на
