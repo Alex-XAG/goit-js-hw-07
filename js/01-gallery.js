@@ -1,34 +1,75 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
-
 // Создание и рендер разметки по массиву данных galleryItems и предоставленному
 // шаблону элемента галереи.
 
 const galleryContainer = document.querySelector(".gallery");
-console.log(galleryContainer);
+const imagesMarkup = createImageMarkup(galleryItems);
 
-galleryItems.map((galleryItem) => {
-  const srcSmallImg = galleryItem.preview;
-  const srcLargeImg = galleryItem.original;
-  const altImg = galleryItem.description;
-  console.log(altImg);
-  galleryContainer.insertAdjacentHTML(
-    "beforeend",
-    `<div class="gallery__item">
-  <a class="gallery__link" href="${srcLargeImg}">
+galleryContainer.insertAdjacentHTML("beforeend", imagesMarkup);
+
+galleryContainer.addEventListener("click", galleryContainerClickHandler);
+
+function createImageMarkup(galleryItems) {
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `<div class="gallery__item">
+  <a class="gallery__link" href="${original}">
     <img
-      class="gallery__image"       src="${srcSmallImg}"
-      data-source="${srcLargeImg}"
-      alt="${altImg}"
+      class="gallery__image"       src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
   </a>
-</div>`
-  );
-});
+</div>`;
+    })
+    .join("");
+}
+function galleryContainerClickHandler(event) {
+  const isGalleryImage = event.target.classList.contains("gallery__image");
+  if (!isGalleryImage) {
+    return;
+  }
+
+  const galleryImageEl = event.target;
+  const imageParent = galleryImageEl.closest(".gallery__item");
+
+  removeActiveClassFromItem();
+  addActiveClassToItem(imageParent);
+}
+
+function removeActiveClassFromItem() {
+  const activeImageItem = document.querySelector(".gallery__item.is-active");
+
+  if (activeImageItem) {
+    activeImageItem.classList.remove("is-active");
+  }
+}
+
+function addActiveClassToItem(imageItem) {
+  imageItem.classList.add("is-active");
+}
+
+//   const galleryLink = document.querySelector(".gallery__link");
+//   galleryLink.addEventListener("click", (event) => event.preventDefault());
 
 // Реализация делегирования на div.gallery и получение url большого изображения.
+galleryContainer.addEventListener("click", openImgHandler);
+
+function openImgHandler(event) {
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  //   console.log(event.target);
+
+  //   const img = document.querySelector(".gallery__image");
+  //   console.log(img);
+  //   img[i].src = srcLargeImg;
+}
+// Подключение скрипта и стилей библиотеки модального окна basicLightbox.
+//  Используй CDN сервис jsdelivr и добавь в проект ссылки на
+// минифицированные(.min) файлы библиотеки.
 
 // галерея изображений
 // Создай галерею с возможностью клика по её элементам и просмотра
@@ -37,10 +78,6 @@ galleryItems.map((galleryItem) => {
 
 // Выполняй это задание в файлах 01-gallery.html и 01-gallery.js.
 // Разбей его на несколько подзадач:
-
-// Подключение скрипта и стилей библиотеки модального окна basicLightbox.
-//  Используй CDN сервис jsdelivr и добавь в проект ссылки на
-// минифицированные(.min) файлы библиотеки.
 
 // Открытие модального окна по клику на элементе галереи.
 // Для этого ознакомься с документацией и примерами.
