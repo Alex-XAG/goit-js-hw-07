@@ -55,18 +55,7 @@ function addActiveClassToItem(imageItem) {
 //   galleryLink.addEventListener("click", (event) => event.preventDefault());
 
 // Реализация делегирования на div.gallery и получение url большого изображения.
-galleryContainer.addEventListener("click", openImgHandler);
 
-function openImgHandler(event) {
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
-  //   console.log(event.target);
-
-  //   const img = document.querySelector(".gallery__image");
-  //   console.log(img);
-  //   img[i].src = srcLargeImg;
-}
 // Подключение скрипта и стилей библиотеки модального окна basicLightbox.
 //  Используй CDN сервис jsdelivr и добавь в проект ссылки на
 // минифицированные(.min) файлы библиотеки.
