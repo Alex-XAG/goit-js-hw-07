@@ -32,23 +32,33 @@ function galleryContainerClickHandler(event) {
     return;
   }
 
-  const galleryImageEl = event.target;
-  const imageParent = galleryImageEl.closest(".gallery__item");
+  const urlOriginal = event.target.dataset.source;
 
-  removeActiveClassFromItem();
-  addActiveClassToItem(imageParent);
+  basicLightboxHandler(urlOriginal);
+
+  galleryLinkPreventDefault();
 }
 
-function removeActiveClassFromItem() {
-  const activeImageItem = document.querySelector(".gallery__item.is-active");
-
-  if (activeImageItem) {
-    activeImageItem.classList.remove("is-active");
+function basicLightboxHandler(url) {
+  const instance = basicLightbox.create(`
+    <img src="${url}" width="800" height="600">
+`);
+  instance.show();
+  const visible = basicLightbox.visible();
+  if (visible) {
+    document.addEventListener("keydown", function (event) {
+      if (event.code === "Escape") {
+        instance.close();
+      }
+    });
   }
 }
 
-function addActiveClassToItem(imageItem) {
-  imageItem.classList.add("is-active");
+function galleryLinkPreventDefault() {
+  const galleryLink = galleryContainer.querySelector("a");
+  galleryLink.addEventListener("click", (event) => {
+    event.preventDefault();
+  });
 }
 
 //   const galleryLink = document.querySelector(".gallery__link");
