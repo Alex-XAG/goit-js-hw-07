@@ -28,6 +28,12 @@ function galleryContainerClickHandler(event) {
     return;
   }
 
+  SimpleLightboxHandler();
+
+  galleryLinkPreventDefault();
+}
+
+function SimpleLightboxHandler() {
   let lightbox = new SimpleLightbox(".gallery a", {
     captions: true,
     captionSelector: "img",
@@ -36,10 +42,8 @@ function galleryContainerClickHandler(event) {
     captionPosition: "bottom",
     captionDelay: 250,
   });
-  console.log(lightbox);
-  lightbox.on("show.lightbox");
 
-  galleryLinkPreventDefault();
+  lightbox.on("show.lightbox");
 }
 
 function galleryLinkPreventDefault() {
