@@ -23,14 +23,14 @@ function createImageMarkup(galleryItems) {
 }
 
 function galleryContainerClickHandler(event) {
+  event.preventDefault();
+
   const isGalleryImage = event.target.classList.contains("gallery__image");
   if (!isGalleryImage) {
     return;
   }
 
   SimpleLightboxHandler();
-
-  galleryLinkPreventDefault();
 }
 
 function SimpleLightboxHandler() {
@@ -44,13 +44,6 @@ function SimpleLightboxHandler() {
   });
 
   lightbox.on("show.lightbox");
-}
-
-function galleryLinkPreventDefault() {
-  const galleryLink = galleryContainer.querySelector("a");
-  galleryLink.addEventListener("click", (event) => {
-    event.preventDefault();
-  });
 }
 
 // Задание 2 - библиотека SimpleLightbox

@@ -27,6 +27,8 @@ function createImageMarkup(galleryItems) {
     .join("");
 }
 function galleryContainerClickHandler(event) {
+  event.preventDefault();
+
   const isGalleryImage = event.target.classList.contains("gallery__image");
   if (!isGalleryImage) {
     return;
@@ -35,8 +37,6 @@ function galleryContainerClickHandler(event) {
   const urlOriginal = event.target.dataset.source;
 
   basicLightboxHandler(urlOriginal);
-
-  galleryLinkPreventDefault();
 }
 
 function basicLightboxHandler(url) {
@@ -52,13 +52,6 @@ function basicLightboxHandler(url) {
       }
     });
   }
-}
-
-function galleryLinkPreventDefault() {
-  const galleryLink = galleryContainer.querySelector("a");
-  galleryLink.addEventListener("click", (event) => {
-    event.preventDefault();
-  });
 }
 
 //   const galleryLink = document.querySelector(".gallery__link");
